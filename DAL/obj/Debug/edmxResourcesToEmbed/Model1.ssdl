@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ticketsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="varchar" MaxLength="30" />
+    <Property Name="subcategoryId" Type="int" />
+  </EntityType>
+  <EntityType Name="countries">
+    <Key>
+      <PropertyRef Name="countryId" />
+    </Key>
+    <Property Name="countryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="countryName" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="prodId" />
+    </Key>
+    <Property Name="prodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryId" Type="int" />
+    <Property Name="subcategoryId" Type="int" />
+    <Property Name="categoryName" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Purchases">
+    <Key>
+      <PropertyRef Name="purchaseId" />
+    </Key>
+    <Property Name="purchaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="originCountry" Type="int" />
+    <Property Name="purchaseCountry" Type="int" />
+    <Property Name="purchaseDate" Type="date" />
+    <Property Name="price" Type="int" />
+    <Property Name="prodId" Type="int" />
+    <Property Name="categoryId" Type="int" />
+    <Property Name="subcategoryId" Type="int" />
+  </EntityType>
+  <EntityType Name="subcategory">
+    <Key>
+      <PropertyRef Name="subcategoryId" />
+    </Key>
+    <Property Name="subcategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subcategoryName" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_categories_subcategory">
+    <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+    <End Role="categories" Type="Self.categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subcategory">
+        <PropertyRef Name="subcategoryId" />
+      </Principal>
+      <Dependent Role="categories">
+        <PropertyRef Name="subcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_categories">
+    <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_subcategory">
+    <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subcategory">
+        <PropertyRef Name="subcategoryId" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="subcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_categories">
+    <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_products">
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="prodId" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="prodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_subcategory">
+    <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subcategory">
+        <PropertyRef Name="subcategoryId" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="subcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ticketsModelStoreContainer">
+    <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="countries" EntityType="Self.countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subcategory" EntityType="Self.subcategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_categories_subcategory" Association="Self.FK_categories_subcategory">
+      <End Role="subcategory" EntitySet="subcategory" />
+      <End Role="categories" EntitySet="categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_categories" Association="Self.FK_products_categories">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_subcategory" Association="Self.FK_products_subcategory">
+      <End Role="subcategory" EntitySet="subcategory" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_categories" Association="Self.FK_Purchases_categories">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_products" Association="Self.FK_Purchases_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_subcategory" Association="Self.FK_Purchases_subcategory">
+      <End Role="subcategory" EntitySet="subcategory" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

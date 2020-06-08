@@ -1,0 +1,16 @@
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\BLL.dll
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\BLL.pdb
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\Converters.dll
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\DAL.dll
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\DTO.dll
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\EntityFramework.dll
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\Converters.pdb
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\DAL.pdb
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\DAL.dll.config
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\DTO.pdb
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\bin\Debug\EntityFramework.xml
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\obj\Debug\BLL.csproj.CopyComplete
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\obj\Debug\BLL.dll
+C:\Users\888\Desktop\תכנות\tickets\Tickets\BLL\obj\Debug\BLL.pdb

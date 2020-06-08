@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="26a0a19b4fb543748c05af28e3a69830" Name="Diagram1">
+        <EntityTypeShape EntityType="ticketsModel.category" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ticketsModel.country" Width="1.5" PointX="0.625" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ticketsModel.product" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ticketsModel.Purchase" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ticketsModel.subcategory" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ticketsModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="ticketsModel.FK_categories_subcategory" ManuallyRouted="false" />
+        <AssociationConnector Association="ticketsModel.FK_products_categories" ManuallyRouted="false" />
+        <AssociationConnector Association="ticketsModel.FK_Purchases_categories" ManuallyRouted="false" />
+        <AssociationConnector Association="ticketsModel.FK_products_subcategory" ManuallyRouted="false" />
+        <AssociationConnector Association="ticketsModel.FK_Purchases_products" ManuallyRouted="false" />
+        <AssociationConnector Association="ticketsModel.FK_Purchases_subcategory" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

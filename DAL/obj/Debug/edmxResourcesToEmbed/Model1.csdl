@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ticketsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="subcategoryId" Type="Int32" />
+    <NavigationProperty Name="subcategory" Relationship="Self.FK_categories_subcategory" FromRole="categories" ToRole="subcategory" />
+    <NavigationProperty Name="products" Relationship="Self.FK_products_categories" FromRole="categories" ToRole="products" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchases_categories" FromRole="categories" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="countryId" />
+    </Key>
+    <Property Name="countryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="countryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="prodId" />
+    </Key>
+    <Property Name="prodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryId" Type="Int32" />
+    <Property Name="subcategoryId" Type="Int32" />
+    <Property Name="categoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="category" Relationship="Self.FK_products_categories" FromRole="products" ToRole="categories" />
+    <NavigationProperty Name="subcategory" Relationship="Self.FK_products_subcategory" FromRole="products" ToRole="subcategory" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchases_products" FromRole="products" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="Purchase">
+    <Key>
+      <PropertyRef Name="purchaseId" />
+    </Key>
+    <Property Name="purchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="originCountry" Type="Int32" />
+    <Property Name="purchaseCountry" Type="Int32" />
+    <Property Name="purchaseDate" Type="DateTime" Precision="0" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="prodId" Type="Int32" />
+    <Property Name="categoryId" Type="Int32" />
+    <Property Name="subcategoryId" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="Self.FK_Purchases_categories" FromRole="Purchases" ToRole="categories" />
+    <NavigationProperty Name="product" Relationship="Self.FK_Purchases_products" FromRole="Purchases" ToRole="products" />
+    <NavigationProperty Name="subcategory" Relationship="Self.FK_Purchases_subcategory" FromRole="Purchases" ToRole="subcategory" />
+  </EntityType>
+  <EntityType Name="subcategory">
+    <Key>
+      <PropertyRef Name="subcategoryId" />
+    </Key>
+    <Property Name="subcategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subcategoryName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="categories" Relationship="Self.FK_categories_subcategory" FromRole="subcategory" ToRole="categories" />
+    <NavigationProperty Name="products" Relationship="Self.FK_products_subcategory" FromRole="subcategory" ToRole="products" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchases_subcategory" FromRole="subcategory" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_categories_subcategory">
+    <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+    <End Role="categories" Type="Self.category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subcategory">
+        <PropertyRef Name="subcategoryId" />
+      </Principal>
+      <Dependent Role="categories">
+        <PropertyRef Name="subcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_categories">
+    <End Role="categories" Type="Self.category" Multiplicity="0..1" />
+    <End Role="products" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_categories">
+    <End Role="categories" Type="Self.category" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_subcategory">
+    <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+    <End Role="products" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subcategory">
+        <PropertyRef Name="subcategoryId" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="subcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_products">
+    <End Role="products" Type="Self.product" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="prodId" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="prodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_subcategory">
+    <End Role="subcategory" Type="Self.subcategory" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subcategory">
+        <PropertyRef Name="subcategoryId" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="subcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ticketsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="countries" EntityType="Self.country" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+    <EntitySet Name="subcategories" EntityType="Self.subcategory" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_categories_subcategory" Association="Self.FK_categories_subcategory">
+      <End Role="subcategory" EntitySet="subcategories" />
+      <End Role="categories" EntitySet="categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_categories" Association="Self.FK_products_categories">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_categories" Association="Self.FK_Purchases_categories">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_subcategory" Association="Self.FK_products_subcategory">
+      <End Role="subcategory" EntitySet="subcategories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_products" Association="Self.FK_Purchases_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_subcategory" Association="Self.FK_Purchases_subcategory">
+      <End Role="subcategory" EntitySet="subcategories" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

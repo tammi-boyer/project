@@ -1,0 +1,5 @@
+C:\Users\888\Desktop\תכנות\tickets\Tickets\DTO\bin\Debug\DTO.dll
+C:\Users\888\Desktop\תכנות\tickets\Tickets\DTO\bin\Debug\DTO.pdb
+C:\Users\888\Desktop\תכנות\tickets\Tickets\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\888\Desktop\תכנות\tickets\Tickets\DTO\obj\Debug\DTO.dll
+C:\Users\888\Desktop\תכנות\tickets\Tickets\DTO\obj\Debug\DTO.pdb
